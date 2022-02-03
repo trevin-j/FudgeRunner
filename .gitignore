@@ -25,4 +25,6 @@ hs_err_pid*
 # Files related to Intellij that should be ignored
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+
+# Output files
 out/
