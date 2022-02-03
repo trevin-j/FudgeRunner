@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FudgeRunner:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FudgeRunner_jar</output-path>
+    <root id="archive" name="FudgeRunner.jar">
+      <element id="module-output" name="FudgeRunner" />
+    </root>
+  </artifact>
+</component>
