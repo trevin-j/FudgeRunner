@@ -71,8 +71,10 @@ public class Interpreter {
         }
 
         // Reset some variables for execution
-        if (doReset)
-            reset();
+        // Some bugs were involved with resetting within runBF
+        // so until those are fixed, the interpreter will always need to be manually reset.
+//        if (doReset)
+//            reset();
 
         // While it is still reading instructions, process the next instruction.
         // Ignore any and all characters that are not one of the 8 instructions.

@@ -1,5 +1,7 @@
 package com.trevinj.fudgerunner;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
@@ -98,6 +100,37 @@ public class Main {
      * @param fileName the name of the file to run.
      */
     private static void runFile(String fileName) {
+        String code = getBFFromFile(fileName);
 
+        // Exit if an error happens
+        if (code == null)
+            return;
+
+        Interpreter fileInterpreter = new Interpreter();
+
+        fileInterpreter.addInstructions(code);
+        fileInterpreter.runBF(false);
+    }
+
+    /**
+     * Get BF code from a file.
+     * @param fileName The name of the bf file
+     * @return the code as a String, or null if an error occurs
+     */
+    private static String getBFFromFile(String fileName) {
+        // Open file if it exists. Print error if the file doesn't exist.
+        try {
+            String code = "";
+            File codeFile = new File(fileName);
+            Scanner fileReader = new Scanner(codeFile);
+            while (fileReader.hasNextLine()) {
+                code += fileReader.nextLine();
+            }
+            return code;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: the specified file does not exist.");
+            return null;
+        }
     }
 }
