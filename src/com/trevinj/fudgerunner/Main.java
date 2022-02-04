@@ -72,6 +72,7 @@ public class Main {
 
             // Check if the command is one of the REPL-specific commands
             // show command prints the current status of the interpreter
+            commandNumber++;
             switch (commandIn) {
                 case "show":
                     System.out.print("> ");
@@ -91,7 +92,6 @@ public class Main {
                     // Make sure brackets match in each line, or the REPL will error and the interpreter will reset.
                     replInterpreter.addInstructions(commandIn);
                     replInterpreter.runBF();
-                    commandNumber++;
                     break;
             }
         }
