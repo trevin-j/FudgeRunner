@@ -156,6 +156,8 @@ public class Interpreter {
             return true;
         }
         if (instruction.equals(',')) {
+            // New line for input
+            System.out.println("");
             // Regardless of how many chars user types, only first one is actually used.
             cells.set(cellPtr, (int)(scanIn.next().charAt(0)));
             return true;
