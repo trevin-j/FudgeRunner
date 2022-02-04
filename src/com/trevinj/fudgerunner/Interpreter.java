@@ -78,9 +78,7 @@ public class Interpreter {
 
     public void addInstructions(String instructionsIn) {
         ArrayList<Character> splitInstructions = strToArrayList(instructionsIn);
-        for (Character instruction: splitInstructions) {
-            instructions.add(instruction);
-        }
+        instructions.addAll(splitInstructions);
     }
 
     /**
@@ -157,7 +155,7 @@ public class Interpreter {
         }
         if (instruction.equals(',')) {
             // New line for input
-            System.out.println("");
+            System.out.println();
             // Regardless of how many chars user types, only first one is actually used.
             cells.set(cellPtr, (int)(scanIn.next().charAt(0)));
             return true;

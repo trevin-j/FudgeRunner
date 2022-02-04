@@ -24,20 +24,20 @@ public class Main {
         }
 
         // -h handling
-        if (firstArg.equals("-h")) {
-            displayHelp();
-        }
-        else if (firstArg.equals("-r")) {
-            openRepl();
-        }
-        else if (firstArg.equals("-f")) {
-            if (args.length > 1) {
-                runFile(args[1]);
-            }
-        }
-        else {
-            System.out.println("Error: unrecognized argument '" + firstArg + "'.");
-            return;
+        switch (firstArg) {
+            case "-h":
+                displayHelp();
+                break;
+            case "-r":
+                openRepl();
+                break;
+            case "-f":
+                if (args.length > 1) {
+                    runFile(args[1]);
+                }
+                break;
+            default:
+                System.out.println("Error: unrecognized argument '" + firstArg + "'.");
         }
     }
 
@@ -50,7 +50,6 @@ public class Main {
         System.out.println("-h             Display help menu.");
         System.out.println("-r             Start the BrainRunner BrainFudge REPL.");
         System.out.println("-f filename    Open and execute the BrainFudge code in the specified file.");
-        return;
     }
 
     /**
@@ -65,6 +64,7 @@ public class Main {
 
         // Forever run the repl until the user specifies to exit.
         // If an error occurs while using the repl, the interpreter data fully resets.
+        label:
         while (true) {
             System.out.println();
             System.out.print("[" + commandNumber + "]: ");
@@ -72,25 +72,27 @@ public class Main {
 
             // Check if the command is one of the REPL-specific commands
             // show command prints the current status of the interpreter
-            if (commandIn.equals("show")) {
-                System.out.print("> ");
-                replInterpreter.show();
-            }
-            // exit command exits the REPL
-            else if (commandIn.equals("exit")) {
-                break;
-            }
-            // reset the interpreter
-            else if (commandIn.equals("reset")) {
-                replInterpreter.reset();
-                System.out.println("Interpreter memory reset.");
-            }
-            else {
-                // EVERYTHING else is considered a comment or valid instructions
-                // Make sure brackets match in each line, or the REPL will error and the interpreter will reset.
-                replInterpreter.addInstructions(commandIn);
-                replInterpreter.runBF();
-                commandNumber++;
+            switch (commandIn) {
+                case "show":
+                    System.out.print("> ");
+                    replInterpreter.show();
+                    break;
+                // exit command exits the REPL
+                case "exit":
+                    break label;
+
+                // reset the interpreter
+                case "reset":
+                    replInterpreter.reset();
+                    System.out.println("Interpreter memory reset.");
+                    break;
+                default:
+                    // EVERYTHING else is considered a comment or valid instructions
+                    // Make sure brackets match in each line, or the REPL will error and the interpreter will reset.
+                    replInterpreter.addInstructions(commandIn);
+                    replInterpreter.runBF();
+                    commandNumber++;
+                    break;
             }
         }
     }
@@ -108,7 +110,7 @@ public class Main {
 
         Interpreter fileInterpreter = new Interpreter();
 
-        fileInterpreter.addInstructions(code);
+        fileInterpreter.setInstructions(code);
         fileInterpreter.runBF();
     }
 
@@ -120,13 +122,13 @@ public class Main {
     private static String getBFFromFile(String fileName) {
         // Open file if it exists. Print error if the file doesn't exist.
         try {
-            String code = "";
+            StringBuilder code = new StringBuilder();
             File codeFile = new File(fileName);
             Scanner fileReader = new Scanner(codeFile);
             while (fileReader.hasNextLine()) {
-                code += fileReader.nextLine();
+                code.append(fileReader.nextLine());
             }
-            return code;
+            return code.toString();
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: the specified file does not exist.");
