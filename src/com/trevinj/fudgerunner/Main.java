@@ -89,7 +89,7 @@ public class Main {
                 // EVERYTHING else is considered a comment or valid instructions
                 // Make sure brackets match in each line, or the REPL will error and the interpreter will reset.
                 replInterpreter.addInstructions(commandIn);
-                replInterpreter.runBF(false);
+                replInterpreter.runBF();
                 commandNumber++;
             }
         }
@@ -109,7 +109,7 @@ public class Main {
         Interpreter fileInterpreter = new Interpreter();
 
         fileInterpreter.addInstructions(code);
-        fileInterpreter.runBF(false);
+        fileInterpreter.runBF();
     }
 
     /**

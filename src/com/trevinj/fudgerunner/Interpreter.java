@@ -55,26 +55,14 @@ public class Interpreter {
     }
 
     /**
-     * Overload the runBF method so that it has a default value of true for doReset
-     */
-    public void runBF() {
-        runBF(true);
-    }
-
-    /**
      * Interpret the BF code, and use console for IO.
      */
-    public void runBF(boolean doReset) {
+    public void runBF() {
         if (!bracketsAreMatched()) {
             reset();
             return;
         }
 
-        // Reset some variables for execution
-        // Some bugs were involved with resetting within runBF
-        // so until those are fixed, the interpreter will always need to be manually reset.
-//        if (doReset)
-//            reset();
 
         // While it is still reading instructions, process the next instruction.
         // Ignore any and all characters that are not one of the 8 instructions.
