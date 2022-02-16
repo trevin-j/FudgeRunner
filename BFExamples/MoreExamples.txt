@@ -1,0 +1,4 @@
+Fibonacci sequence: http://esoteric.sange.fi/brainfuck/bf-source/prog/fibonacci.txt
+Factorials: https://github.com/frerich/brainfuck/blob/master/samples/factorial.b
+ASCII Mandelbrot fractal: https://sange.fi/esoteric/brainfuck/utils/mandelbrot/mandelbrot.b
+Game of Life: http://www.linusakesson.net/programming/brainfuck/
